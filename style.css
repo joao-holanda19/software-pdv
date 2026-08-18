@@ -1,0 +1,514 @@
+:root {
+    --knc-blue: #00365a;
+    --knc-blue-dark: #00223a;
+    --knc-accent: #6f8ab7;
+    --knc-light-bg: #f8fafc;
+    --knc-border: #e2e8f0;
+    --knc-gray-box: #edf2f7;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    user-select: none;
+  }
+  
+  body {
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Formato Kiosk 27" Vertical (1080x1920 Proporcional) */
+  .kiosk-container {
+    width: 100vw;
+    max-width: 540px;
+    height: 100vh;
+    max-height: 960px;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (min-width: 1080px) and (min-height: 1800px) {
+    .kiosk-container {
+      max-width: 1080px;
+      max-height: 1920px;
+    }
+  }
+  
+  .screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+  }
+  
+  .screen.active {
+    display: flex;
+  }
+  
+  /* TOP NAV */
+  .top-nav {
+    background-color: var(--knc-blue);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-logo {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+  
+  .nav-logo.large {
+    font-size: 34px;
+    text-align: center;
+    margin-top: 40px;
+    letter-spacing: 4px;
+  }
+  
+  .btn-voltar {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  /* CORPO DAS TELAS */
+  .screen-body {
+    flex: 1;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .center-flex {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .header-icon-title {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .header-icon-title.horizontal {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+  }
+  
+  .icon-bubble {
+    width: 60px;
+    height: 60px;
+    background-color: var(--knc-blue);
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+  
+  .icon-bubble.small {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+  
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  
+  .subtitle.white {
+    color: #cbd5e1;
+  }
+  
+  /* HOME */
+  .brand-hero {
+    text-align: center;
+    margin-top: 60px;
+  }
+  
+  .logo-text {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--knc-blue);
+    letter-spacing: 3px;
+  }
+  
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .circle-btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: var(--knc-blue);
+    color: white;
+    border: none;
+    font-size: 45px;
+    box-shadow: 0 10px 25px rgba(0, 54, 90, 0.3);
+    cursor: pointer;
+  }
+  
+  .btn-primary-large {
+    background-color: var(--knc-blue);
+    color: white;
+    border: none;
+    padding: 22px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .footer-bar {
+    background-color: var(--knc-blue-dark);
+    color: #cbd5e1;
+    text-align: center;
+    padding: 12px;
+    font-size: 11px;
+  }
+  
+  /* CLIENTE KNC */
+  .choice-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 25px;
+  }
+  
+  .choice-card {
+    border: 1.5px solid var(--knc-border);
+    padding: 20px 14px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .choice-card i {
+    font-size: 32px;
+    color: var(--knc-blue);
+  }
+  
+  .choice-card.selected {
+    border-color: var(--knc-blue);
+    background-color: #f0f6fa;
+  }
+  
+  .choice-card strong {
+    font-size: 14px;
+    color: var(--text-dark);
+  }
+  
+  .choice-card span {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input-group label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  
+  .input-group input {
+    padding: 14px;
+    border: 1px solid var(--knc-border);
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .btn-action {
+    background-color: var(--knc-blue);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .legal-text {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 15px;
+  }
+  
+/* ESCANEAR */
+.no-padding-bottom {
+    padding-bottom: 0 !important;
+    justify-content: flex-start;
+    padding-top: 40px;
+  }
+  
+  .scan-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.3;
+    margin-top: 20px;
+  }
+  
+  .scan-sub {
+    font-size: 15px;
+    color: #333333;
+    line-height: 1.4;
+    margin-top: 15px;
+  }
+  
+  .scanner-circle {
+    width: 150px;
+    height: 150px;
+    background-color: #8fa5e8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 65px;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+  
+  .arrow-indicator {
+    font-size: 28px;
+    color: #1a1a1a;
+    margin-top: 25px;
+  }
+  
+  /* Área Azul Inferior com Molduras */
+  .scanner-bottom-area {
+    background-color: #00365a;
+    width: 100%;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+  
+  .scanner-outer-box {
+    width: 100%;
+    height: 230px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-bottom: none;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 14px 14px 0 14px;
+    box-sizing: border-box;
+  }
+  
+  .scanner-inner-box {
+    width: 100%;
+    height: 100%;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .scanner-icon-target {
+    font-size: 55px;
+    color: #0a192f;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .scanner-instruction {
+    color: #ffffff;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  
+  /* CARRINHO */
+  .table-wrapper {
+    background-color: #f1f5f9;
+    border-radius: 6px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .cart-table th {
+    padding: 12px 10px;
+    background-color: #e2e8f0;
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+  
+  .cart-table td {
+    padding: 14px 10px;
+    border-bottom: 1px solid var(--knc-border);
+    color: var(--text-dark);
+  }
+  
+  .checkout-footer {
+    background-color: white;
+    border-top: 1px solid var(--knc-border);
+  }
+  
+  .total-row {
+    background-color: var(--knc-blue);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    font-size: 18px;
+  }
+  
+  .footer-actions {
+    display: flex;
+    gap: 10px;
+    padding: 12px 20px;
+  }
+  
+  .btn-secondary {
+    flex: 1;
+    background-color: #f1f5f9;
+    border: 1px solid var(--knc-border);
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .btn-action-large {
+    flex: 2;
+    background-color: var(--knc-blue);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* CHECKOUT / PAGAMENTOS */
+  .payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .pay-card {
+    background-color: var(--knc-gray-box);
+    border: 1px solid var(--knc-border);
+    border-radius: 8px;
+    padding: 24px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .pay-card i {
+    font-size: 34px;
+    color: var(--text-dark);
+  }
+  
+  .pay-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  
+  /* TELA SUCESSO */
+  .screen.dark-theme {
+    background-color: var(--knc-blue);
+    color: white;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  
+  .success-circle {
+    width: 130px;
+    height: 130px;
+    border: 3px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    margin-bottom: 25px;
+  }
+  
+  .success-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  .btn-white-action {
+    background-color: white;
+    color: var(--knc-blue);
+    border: none;
+    padding: 18px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
