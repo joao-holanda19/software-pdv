@@ -29,9 +29,9 @@
   /* Formato Kiosk 27" Vertical (1080x1920 Proporcional) */
   .kiosk-container {
     width: 100vw;
-    max-width: 540px;
+    max-width: 3840px;
     height: 100vh;
-    max-height: 960px;
+    max-height: 2160px;
     background-color: #ffffff;
     position: relative;
     overflow: hidden;
