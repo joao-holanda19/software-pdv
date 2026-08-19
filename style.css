@@ -200,23 +200,56 @@
   }
   
   /* CLIENTE KNC */
+/* Alinha o conteúdo mais ao topo da tela */
 .screen-body:has(.choice-cards),
 #screen-cliente .screen-body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Sobe o conteúdo para o topo */
   align-items: center;
   width: 100%;
-  padding: 40px;
+  padding: 20px 40px 40px 40px; /* Reduz padding superior */
 }
 
+/* Bloco do Ícone, Título e Subtítulo */
+.screen-body:has(.choice-cards) .header-icon-title,
+#screen-cliente .header-icon-title {
+  text-align: center;
+  margin-top: 10px;      /* Sobe o conjunto */
+  margin-bottom: 25px;   /* Espaço equilibrado antes dos cards */
+}
+
+.screen-body:has(.choice-cards) .icon-bubble,
+#screen-cliente .icon-bubble {
+  width: 75px;
+  height: 75px;
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.screen-body:has(.choice-cards) h2,
+#screen-cliente h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.screen-body:has(.choice-cards) .subtitle,
+#screen-cliente .subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-top: 0;
+}
+
+/* Cards de Escolha */
 .choice-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   width: 100%;
   max-width: 850px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 
 .choice-card {
@@ -254,6 +287,7 @@
   color: var(--text-muted);
 }
 
+/* Campo de Entrada */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -277,6 +311,7 @@
   width: 100%;
 }
 
+/* Botão de Ação */
 .btn-action {
   background-color: var(--knc-blue);
   color: white;
@@ -295,7 +330,7 @@
   text-align: center;
   font-size: 15px;
   color: var(--text-muted);
-  padding: 25px 15px;
+  padding: 20px 15px;
   max-width: 850px;
 }
   
