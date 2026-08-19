@@ -204,41 +204,43 @@
 #screen-cliente .screen-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribui topo, centro e rodapé uniformemente */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 30px 40px;
+  height: 100%;
+  padding: 30px 40px 25px 40px;
+  gap: 20px;
 }
 
-/* CABEÇALHO HORIZONTAL (SUBIDO) */
+/* 1. CABEÇALHO HORIZONTAL NO TOPO */
 .header-icon-title.horizontal {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
-  max-width: 850px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  max-width: 900px;
+  margin: 10px 0 10px 0;
   text-align: left;
+  flex-shrink: 0;
 }
 
 .header-icon-title.horizontal .icon-bubble {
-  width: 90px;
-  height: 90px;
-  min-width: 90px;
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
   background-color: var(--knc-blue);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 44px;
+  font-size: 50px;
   margin-bottom: 0;
 }
 
 .header-icon-title.horizontal h2 {
-  font-size: 38px;
+  font-size: 44px;
   font-weight: 800;
   color: var(--text-dark);
   letter-spacing: 1px;
@@ -246,93 +248,96 @@
   line-height: 1.1;
 }
 
-/* Tarja azul do subtítulo igual à imagem */
 .header-icon-title.horizontal .subtitle {
   background-color: var(--knc-blue);
   color: white;
   display: inline-block;
-  padding: 6px 14px;
-  font-size: 16px;
+  padding: 8px 18px;
+  font-size: 18px;
   font-weight: 600;
-  border-radius: 3px;
-  margin-top: 8px;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
-/* CARDS DE OPÇÃO */
+/* 2. CARDS CENTRAIS EXPANDIDOS (Preenchem a altura) */
 .choice-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   width: 100%;
-  max-width: 850px;
-  margin: 0 auto;
+  max-width: 900px;
+  flex: 1.2;              /* Expande para ocupar o espaço central */
+  min-height: 320px;
+  max-height: 480px;
 }
 
 .choice-card {
   border: 1.5px solid var(--knc-border);
   background-color: #ffffff;
-  padding: 40px 24px;
-  border-radius: 12px;
+  padding: 30px 24px;
+  border-radius: 14px;
   text-align: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  min-height: 240px;
+  justify-content: space-evenly; /* Distribui ícone, título e texto internamente */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .choice-card i {
-  font-size: 60px;
-  color: #1e88e5; /* Azul vivo para os bonecos */
+  font-size: 72px;
+  color: #1e88e5;
 }
 
 .choice-card strong {
-  font-size: 22px;
+  font-size: 26px;
   color: var(--text-dark);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .choice-card span {
-  font-size: 16px;
-  color: var(--text-dark);
+  font-size: 18px;
+  color: #475569;
   line-height: 1.4;
-  max-width: 280px;
+  max-width: 320px;
 }
 
 .choice-card.selected {
   border-color: var(--knc-blue);
   background-color: #f0f6fa;
-  box-shadow: 0 6px 18px rgba(0, 54, 90, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 54, 90, 0.1);
 }
 
-/* BLOCO DE INPUT / CONFIRMAÇÃO */
+/* 3. BLOCO DO CPF (Altura encorpada) */
 .input-group {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
-  max-width: 850px;
+  max-width: 900px;
   border: 1.5px solid var(--knc-border);
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: #ffffff;
   padding: 24px;
   gap: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .input-group label {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   color: var(--knc-blue);
   text-align: left;
 }
 
 .input-group input {
-  padding: 18px 20px;
+  padding: 20px 24px;
   border: 1.5px solid var(--knc-border);
   background-color: #f8fafc;
-  border-radius: 6px;
-  font-size: 24px;
+  border-radius: 8px;
+  font-size: 26px;
   color: #334155;
   outline: none;
   width: 100%;
@@ -342,9 +347,9 @@
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  padding: 20px;
-  border-radius: 6px;
-  font-size: 18px;
+  padding: 22px;
+  border-radius: 8px;
+  font-size: 20px;
   font-weight: 700;
   cursor: pointer;
   width: 100%;
@@ -353,13 +358,14 @@
   align-items: center;
 }
 
-/* TEXTO LEGAL RODAPÉ */
+/* 4. TEXTO DE SEGURANÇA NO RODAPÉ */
 .legal-text {
   text-align: center;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--knc-blue);
-  padding: 10px 0 0 0;
   font-weight: 500;
+  padding: 5px 0;
+  flex-shrink: 0;
 }
   
 /* ESCANEAR */
