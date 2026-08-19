@@ -34,15 +34,17 @@ function selectCpfOption(isCpf) {
   document.getElementById("card-nao").classList.toggle("selected", !isCpf);
 }
 
-// Adicionar produto ao carrinho (aceita qualquer código lido)
+// Adicionar produto ao carrinho (gera nome e preço aleatório se não cadastrado)
 function addProduct(barcode) {
   let item = PRODUCTS_DB[barcode];
 
-  // Se o produto não estiver cadastrado, cria automaticamente para a apresentação
   if (!item) {
+    // Gera um preço aleatório entre R$ 4,50 e R$ 29,90 com 2 casas decimais
+    const randomPrice = parseFloat((Math.random() * (29.90 - 4.50) + 4.50).toFixed(2));
+
     item = {
-      name: `Item (${barcode})`,
-      price: 8.50 // Valor padrão para novos itens escaneados
+      name: `Produto (${barcode})`,
+      price: randomPrice
     };
   }
 
