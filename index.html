@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>PDV KNC</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="kiosk-container">
+
+    <!-- TELA 1: HOME -->
+    <section id="step-home" class="screen active">
+      <div class="brand-hero">
+        <h1 class="logo-text">KNC</h1>
+      </div>
+      <div class="center-content">
+        <button class="circle-btn" onclick="goToStep('cliente')">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+      </div>
+      <button class="btn-primary-large" onclick="goToStep('cliente')">
+        Clique para iniciar a sua compra
+      </button>
+      <footer class="footer-bar">
+        <span>Soluções que conectam, resultados que transformam.</span>
+      </footer>
+    </section>
+
+    <!-- TELA 2: CLIENTE KNC -->
+    <section id="step-cliente" class="screen">
+      <header class="top-nav">
+        <h2 class="nav-logo">KNC</h2>
+        <button class="btn-voltar" onclick="goToStep('home')">Voltar</button>
+      </header>
+      <div class="screen-body">
+        <div class="header-icon-title">
+          <div class="icon-bubble"><i class="fa-solid fa-user"></i></div>
+          <h3>CLIENTE KNC?</h3>
+          <p class="subtitle">Identifique-se para benefícios exclusivos</p>
+        </div>
+        
+        <div class="choice-cards">
+          <div class="choice-card selected" id="card-sim" onclick="selectCpfOption(true)">
+            <i class="fa-solid fa-user-check"></i>
+            <strong>Sou cliente KNC</strong>
+            <span>Digite seu CPF para acumular benefícios e descontos</span>
+          </div>
+          <div class="choice-card" id="card-nao" onclick="goToStep('escanear')">
+            <i class="fa-solid fa-user-slash"></i>
+            <strong>Não sou cliente</strong>
+            <span>Continuar compra sem identificação</span>
+          </div>
+        </div>
+
+        <div class="input-group" id="cpf-container">
+          <label>Digite o seu CPF</label>
+          <input type="text" id="cpf-input" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
+          <button class="btn-action" onclick="goToStep('escanear')">Confirmar CPF <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <footer class="legal-text">Seus dados estão seguros conosco.</footer>
+    </section>
+
+<!-- TELA 3: ESCANEAR -->
+<section id="step-escanear" class="screen">
+  <header class="top-nav">
+    <h2 class="nav-logo">KNC</h2>
+    <button class="btn-voltar" onclick="goToStep('cliente')">&lt; Voltar</button>
+  </header>
+  
+  <div class="screen-body center-flex no-padding-bottom">
+    <div class="scanner-circle">
+      <i class="fa-solid fa-barcode"></i>
+    </div>
+    
+    <h3 class="scan-title">Faça a leitura do código<br>do produto</h3>
+    <p class="subtitle scan-sub">Aproxime o código de barras<br>abaixo</p>
+    
+    <i class="fa-solid fa-chevron-down arrow-indicator"></i>
+  </div>
+
+  <div class="scanner-bottom-area">
+    <div class="scanner-outer-box">
+      <div class="scanner-inner-box">
+        <div class="scanner-icon-target">
+          <i class="fa-solid fa-barcode"></i>
+        </div>
+        <span class="scanner-instruction">Posicione o código<br>de barras no leitor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- TELA 4: CARRINHO -->
+    <section id="step-carrinho" class="screen">
+      <header class="top-nav">
+        <h2 class="nav-logo">KNC</h2>
+        <button class="btn-voltar" onclick="goToStep('escanear')">+ Adicionar Mais</button>
+      </header>
+      <div class="screen-body">
+        <div class="header-icon-title horizontal">
+          <div class="icon-bubble small"><i class="fa-solid fa-cart-shopping"></i></div>
+          <h3>Sua compra</h3>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Qtde</th>
+                <th>Valor Unit</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="cart-items">
+              <!-- Renderizado via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="checkout-footer">
+        <div class="total-row">
+          <span>Total da compra</span>
+          <strong id="cart-total-value">R$ 0,00</strong>
+        </div>
+        <div class="footer-actions">
+          <button class="btn-secondary" onclick="goToStep('escanear')">Voltar</button>
+          <button class="btn-action-large" onclick="goToStep('checkout')">Finalizar Pedido <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 5: FORMAS DE PAGAMENTO -->
+    <section id="step-checkout" class="screen">
+      <header class="top-nav">
+        <h2 class="nav-logo">KNC</h2>
+        <button class="btn-voltar" onclick="goToStep('carrinho')">Voltar</button>
+      </header>
+      <div class="screen-body">
+        <div class="header-icon-title horizontal">
+          <div class="icon-bubble small"><i class="fa-regular fa-credit-card"></i></div>
+          <h3>Formas de pagamento</h3>
+        </div>
+
+        <div class="payment-grid">
+          <div class="pay-card" onclick="finishPayment('Cartão de Débito')">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Cartão de Débito</span>
+          </div>
+          <div class="pay-card" onclick="finishPayment('Cartão de Crédito')">
+            <i class="fa-regular fa-credit-card"></i>
+            <span>Cartão de Crédito</span>
+          </div>
+          <div class="pay-card" onclick="finishPayment('PIX')">
+            <i class="fa-brands fa-pix"></i>
+            <span>Pix</span>
+          </div>
+          <div class="pay-card" onclick="finishPayment('Dinheiro')">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            <span>Dinheiro</span>
+          </div>
+          <div class="pay-card" onclick="finishPayment('Vale Refeição')">
+            <i class="fa-solid fa-gift"></i>
+            <span>Alimentação</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkout-footer">
+        <div class="total-row">
+          <span>Total a pagar</span>
+          <strong id="checkout-total-value">R$ 0,00</strong>
+        </div>
+        <div class="footer-actions">
+          <button class="btn-secondary" onclick="goToStep('carrinho')">Voltar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 6: CONFIRMAÇÃO -->
+    <section id="step-confirmacao" class="screen dark-theme">
+      <h2 class="nav-logo large">KNC</h2>
+      <div class="center-content">
+        <div class="success-circle">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 class="success-title">Sua compra foi realizada com sucesso!</h3>
+        <p class="subtitle white">Obrigado pela sua compra!<br>Volte Sempre.</p>
+      </div>
+      <button class="btn-white-action" onclick="resetAll()">
+        <i class="fa-solid fa-cart-shopping"></i> Iniciar nova compra
+      </button>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
