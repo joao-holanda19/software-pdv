@@ -200,138 +200,166 @@
   }
   
   /* CLIENTE KNC */
-/* Alinha o conteúdo mais ao topo da tela */
 .screen-body:has(.choice-cards),
 #screen-cliente .screen-body {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Sobe o conteúdo para o topo */
+  justify-content: space-between; /* Distribui topo, centro e rodapé uniformemente */
   align-items: center;
   width: 100%;
-  padding: 20px 40px 40px 40px; /* Reduz padding superior */
+  padding: 30px 40px;
 }
 
-/* Bloco do Ícone, Título e Subtítulo */
-.screen-body:has(.choice-cards) .header-icon-title,
-#screen-cliente .header-icon-title {
-  text-align: center;
-  margin-top: 10px;      /* Sobe o conjunto */
-  margin-bottom: 25px;   /* Espaço equilibrado antes dos cards */
+/* CABEÇALHO HORIZONTAL (SUBIDO) */
+.header-icon-title.horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 850px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.screen-body:has(.choice-cards) .icon-bubble,
-#screen-cliente .icon-bubble {
-  width: 75px;
-  height: 75px;
-  font-size: 34px;
-  margin-bottom: 12px;
+.header-icon-title.horizontal .icon-bubble {
+  width: 90px;
+  height: 90px;
+  min-width: 90px;
+  background-color: var(--knc-blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  margin-bottom: 0;
 }
 
-.screen-body:has(.choice-cards) h2,
-#screen-cliente h2 {
-  font-size: 32px;
-  font-weight: 700;
+.header-icon-title.horizontal h2 {
+  font-size: 38px;
+  font-weight: 800;
   color: var(--text-dark);
-  margin-bottom: 6px;
+  letter-spacing: 1px;
+  margin: 0;
+  line-height: 1.1;
 }
 
-.screen-body:has(.choice-cards) .subtitle,
-#screen-cliente .subtitle {
-  font-size: 18px;
-  color: var(--text-muted);
-  margin-top: 0;
+/* Tarja azul do subtítulo igual à imagem */
+.header-icon-title.horizontal .subtitle {
+  background-color: var(--knc-blue);
+  color: white;
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 3px;
+  margin-top: 8px;
 }
 
-/* Cards de Escolha */
+/* CARDS DE OPÇÃO */
 .choice-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   width: 100%;
   max-width: 850px;
-  margin-bottom: 30px;
+  margin: 0 auto;
 }
 
 .choice-card {
-  border: 2px solid var(--knc-border);
-  padding: 36px 20px;
-  border-radius: 14px;
+  border: 1.5px solid var(--knc-border);
+  background-color: #ffffff;
+  padding: 40px 24px;
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  transition: all 0.2s ease;
+  gap: 16px;
+  min-height: 240px;
 }
 
 .choice-card i {
-  font-size: 54px;
-  color: var(--knc-blue);
-}
-
-.choice-card.selected {
-  border-color: var(--knc-blue);
-  background-color: #f0f6fa;
-  box-shadow: 0 8px 20px rgba(0, 54, 90, 0.12);
+  font-size: 60px;
+  color: #1e88e5; /* Azul vivo para os bonecos */
 }
 
 .choice-card strong {
   font-size: 22px;
   color: var(--text-dark);
+  font-weight: 600;
 }
 
 .choice-card span {
   font-size: 16px;
-  color: var(--text-muted);
+  color: var(--text-dark);
+  line-height: 1.4;
+  max-width: 280px;
 }
 
-/* Campo de Entrada */
+.choice-card.selected {
+  border-color: var(--knc-blue);
+  background-color: #f0f6fa;
+  box-shadow: 0 6px 18px rgba(0, 54, 90, 0.08);
+}
+
+/* BLOCO DE INPUT / CONFIRMAÇÃO */
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   width: 100%;
   max-width: 850px;
+  border: 1.5px solid var(--knc-border);
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 24px;
+  gap: 16px;
 }
 
 .input-group label {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--knc-blue);
+  text-align: left;
 }
 
 .input-group input {
-  padding: 22px;
-  border: 2px solid var(--knc-border);
-  border-radius: 10px;
-  font-size: 22px;
+  padding: 18px 20px;
+  border: 1.5px solid var(--knc-border);
+  background-color: #f8fafc;
+  border-radius: 6px;
+  font-size: 24px;
+  color: #334155;
   outline: none;
   width: 100%;
 }
 
-/* Botão de Ação */
 .btn-action {
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  padding: 22px;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: bold;
+  padding: 20px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 20px;
   width: 100%;
-  max-width: 850px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* TEXTO LEGAL RODAPÉ */
 .legal-text {
   text-align: center;
   font-size: 15px;
-  color: var(--text-muted);
-  padding: 20px 15px;
-  max-width: 850px;
+  color: var(--knc-blue);
+  padding: 10px 0 0 0;
+  font-weight: 500;
 }
   
 /* ESCANEAR */
