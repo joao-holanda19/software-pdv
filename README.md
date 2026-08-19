@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Totem PDV de Autoatendimento 27" (1080x1920) | KNC Brasil
 
 Sistema web desenvolvido para totens de autoatendimento touch-screen verticais (proporção 9:16 / 1080x1920) da **KNC Brasil**.
@@ -47,3 +48,8 @@ software-pdv-main/
 ## ⚙️ Como Executar
 
 Basta abrir o arquivo `index.html` em qualquer navegador web moderno. Para modo totem de tela cheia, pressione `F11` ou utilize o Chromium em modo Kiosk (`--kiosk --kiosk-printing`).
+=======
+# software-pdv
+
+# link do site: https://software-pdv.vercel.app/
+>>>>>>> f45c92698db7fe8ef1a2139974493a3866785c26
