@@ -18,33 +18,26 @@
 }
 
 body {
-  background-color: #111;
+  background-color: #0b131e;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
 
-/* Formato Kiosk 27" Vertical (1080x1920 Proporcional) */
+/* Configurado para Resolução 3840px x 2160px */
 .kiosk-container {
   width: 100vw;
-  max-width: 540px;
   height: 100vh;
-  max-height: 960px;
+  max-width: 3840px;
+  max-height: 2160px;
   background-color: #ffffff;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-}
-
-@media (min-width: 1080px) and (min-height: 1800px) {
-  .kiosk-container {
-    max-width: 1080px;
-    max-height: 1920px;
-  }
 }
 
 .screen {
@@ -64,39 +57,40 @@ body {
 .top-nav {
   background-color: var(--knc-blue);
   color: white;
-  padding: 20px 24px;
+  padding: clamp(20px, 2.5vh, 50px) clamp(24px, 3vw, 60px);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .nav-logo {
-  font-size: 26px;
+  font-size: clamp(28px, 2.5vw, 48px);
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .nav-logo.large {
-  font-size: 34px;
+  font-size: clamp(40px, 4vw, 70px);
   text-align: center;
-  margin-top: 40px;
-  letter-spacing: 4px;
+  margin-top: 5vh;
+  letter-spacing: 6px;
 }
 
 .btn-voltar {
   background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   color: white;
-  padding: 6px 16px;
-  border-radius: 4px;
+  padding: clamp(8px, 1vh, 16px) clamp(18px, 1.5vw, 36px);
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: clamp(16px, 1.2vw, 24px);
+  font-weight: 600;
 }
 
 /* CORPO DAS TELAS */
 .screen-body {
   flex: 1;
-  padding: 24px 24px;
+  padding: clamp(24px, 3vh, 60px) clamp(24px, 4vw, 80px);
   display: flex;
   flex-direction: column;
 }
@@ -109,43 +103,48 @@ body {
 
 .header-icon-title {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: clamp(25px, 4vh, 50px);
 }
 
 .header-icon-title.horizontal {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: clamp(16px, 1.5vw, 30px);
   text-align: left;
-  margin-bottom: 35px;
-  padding-top: 6px;
+  margin-bottom: clamp(30px, 4vh, 60px);
+  padding-top: 10px;
+}
+
+.header-icon-title h3 {
+  font-size: clamp(24px, 2vw, 40px);
+  color: var(--text-dark);
 }
 
 .icon-bubble {
-  width: 60px;
-  height: 60px;
+  width: clamp(70px, 6vw, 120px);
+  height: clamp(70px, 6vw, 120px);
   background-color: var(--knc-blue);
   color: white;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
-  margin-bottom: 10px;
+  font-size: clamp(30px, 2.5vw, 55px);
+  margin-bottom: 15px;
 }
 
 .icon-bubble.small {
-  width: 48px;
-  height: 48px;
-  font-size: 22px;
+  width: clamp(55px, 4.5vw, 90px);
+  height: clamp(55px, 4.5vw, 90px);
+  font-size: clamp(24px, 2vw, 42px);
   margin-bottom: 0;
   flex-shrink: 0;
 }
 
 .subtitle {
   color: var(--text-muted);
-  font-size: 14px;
-  margin-top: 4px;
+  font-size: clamp(15px, 1.2vw, 24px);
+  margin-top: 8px;
 }
 
 .subtitle.white {
@@ -155,14 +154,14 @@ body {
 /* HOME */
 .brand-hero {
   text-align: center;
-  margin-top: 60px;
+  margin-top: clamp(40px, 8vh, 120px);
 }
 
 .logo-text {
-  font-size: 52px;
+  font-size: clamp(60px, 7vw, 130px);
   font-weight: 900;
   color: var(--knc-blue);
-  letter-spacing: 3px;
+  letter-spacing: 6px;
 }
 
 .center-content {
@@ -173,57 +172,61 @@ body {
 }
 
 .circle-btn {
-  width: 120px;
-  height: 120px;
+  width: clamp(140px, 12vw, 240px);
+  height: clamp(140px, 12vw, 240px);
   border-radius: 50%;
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  font-size: 45px;
-  box-shadow: 0 10px 25px rgba(0, 54, 90, 0.3);
+  font-size: clamp(50px, 4.5vw, 90px);
+  box-shadow: 0 15px 35px rgba(0, 54, 90, 0.35);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary-large {
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  padding: 22px;
-  font-size: 18px;
+  padding: clamp(24px, 3vh, 45px);
+  font-size: clamp(20px, 1.8vw, 36px);
   font-weight: bold;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 .footer-bar {
   background-color: var(--knc-blue-dark);
   color: #cbd5e1;
   text-align: center;
-  padding: 12px;
-  font-size: 11px;
+  padding: clamp(14px, 1.5vh, 24px);
+  font-size: clamp(13px, 1vw, 20px);
 }
 
 /* CLIENTE KNC */
 .choice-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 25px;
+  gap: clamp(16px, 2vw, 36px);
+  margin-bottom: clamp(25px, 3.5vh, 50px);
 }
 
 .choice-card {
-  border: 1.5px solid var(--knc-border);
-  padding: 20px 14px;
-  border-radius: 8px;
+  border: 2px solid var(--knc-border);
+  padding: clamp(24px, 3vh, 45px) clamp(16px, 1.5vw, 30px);
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .choice-card i {
-  font-size: 32px;
+  font-size: clamp(38px, 3vw, 65px);
   color: var(--knc-blue);
 }
 
@@ -233,31 +236,31 @@ body {
 }
 
 .choice-card strong {
-  font-size: 14px;
+  font-size: clamp(16px, 1.4vw, 28px);
   color: var(--text-dark);
 }
 
 .choice-card span {
-  font-size: 12px;
+  font-size: clamp(13px, 1.1vw, 20px);
   color: var(--text-muted);
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .input-group label {
-  font-size: 13px;
+  font-size: clamp(14px, 1.1vw, 22px);
   color: var(--text-muted);
 }
 
 .input-group input {
-  padding: 14px;
-  border: 1px solid var(--knc-border);
-  border-radius: 6px;
-  font-size: 16px;
+  padding: clamp(16px, 1.8vh, 28px);
+  border: 2px solid var(--knc-border);
+  border-radius: 8px;
+  font-size: clamp(18px, 1.4vw, 28px);
   outline: none;
 }
 
@@ -265,100 +268,101 @@ body {
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  padding: 15px;
-  border-radius: 6px;
+  padding: clamp(16px, 2vh, 30px);
+  border-radius: 8px;
   font-weight: bold;
+  font-size: clamp(16px, 1.3vw, 26px);
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .legal-text {
   text-align: center;
-  font-size: 12px;
+  font-size: clamp(13px, 1vw, 20px);
   color: var(--text-muted);
-  padding: 15px;
+  padding: 20px;
 }
 
 /* ESCANEAR */
 .no-padding-bottom {
   padding-bottom: 0 !important;
   justify-content: flex-start;
-  padding-top: 40px;
+  padding-top: clamp(20px, 4vh, 60px);
 }
 
 .scan-title {
-  font-size: 22px;
+  font-size: clamp(26px, 2.3vw, 44px);
   font-weight: 600;
   color: #1a1a1a;
   line-height: 1.3;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .scan-sub {
-  font-size: 15px;
+  font-size: clamp(16px, 1.3vw, 26px);
   color: #333333;
   line-height: 1.4;
-  margin-top: 15px;
+  margin-top: 18px;
 }
 
 .scanner-circle {
-  width: 150px;
-  height: 150px;
+  width: clamp(160px, 14vw, 260px);
+  height: clamp(160px, 14vw, 260px);
   background-color: #8fa5e8;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 65px;
+  font-size: clamp(70px, 6vw, 120px);
   color: #1a1a1a;
   margin-bottom: 10px;
 }
 
 .arrow-indicator {
-  font-size: 28px;
+  font-size: clamp(32px, 2.5vw, 55px);
   color: #1a1a1a;
-  margin-top: 25px;
+  margin-top: clamp(20px, 3vh, 40px);
 }
 
 /* Área Azul Inferior com Molduras */
 .scanner-bottom-area {
   background-color: #00365a;
   width: 100%;
-  height: 260px;
+  height: clamp(260px, 32vh, 450px);
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding: 0 30px;
+  padding: 0 clamp(30px, 4vw, 80px);
   box-sizing: border-box;
 }
 
 .scanner-outer-box {
   width: 100%;
-  height: 230px;
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  height: 90%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-bottom: none;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  padding: 14px 14px 0 14px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: clamp(14px, 1.5vh, 25px) clamp(14px, 1.5vw, 25px) 0 clamp(14px, 1.5vw, 25px);
   box-sizing: border-box;
 }
 
 .scanner-inner-box {
   width: 100%;
   height: 100%;
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-bottom: none;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 15px;
 }
 
 .scanner-icon-target {
-  font-size: 55px;
+  font-size: clamp(60px, 5.5vw, 100px);
   color: #0a192f;
   background: transparent;
   display: flex;
@@ -368,7 +372,7 @@ body {
 
 .scanner-instruction {
   color: #ffffff;
-  font-size: 13px;
+  font-size: clamp(14px, 1.2vw, 24px);
   text-align: center;
   line-height: 1.3;
   font-weight: 400;
@@ -378,7 +382,7 @@ body {
 /* CARRINHO */
 .table-wrapper {
   background-color: #f1f5f9;
-  border-radius: 6px;
+  border-radius: 10px;
   flex: 1;
   overflow-y: auto;
 }
@@ -387,25 +391,25 @@ body {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 14px;
+  font-size: clamp(15px, 1.2vw, 24px);
 }
 
 .cart-table th {
-  padding: 12px 10px;
+  padding: clamp(14px, 1.6vh, 26px) clamp(12px, 1.2vw, 22px);
   background-color: #e2e8f0;
   color: var(--text-dark);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .cart-table td {
-  padding: 14px 10px;
+  padding: clamp(16px, 1.8vh, 28px) clamp(12px, 1.2vw, 22px);
   border-bottom: 1px solid var(--knc-border);
   color: var(--text-dark);
 }
 
 .checkout-footer {
   background-color: white;
-  border-top: 1px solid var(--knc-border);
+  border-top: 2px solid var(--knc-border);
 }
 
 .total-row {
@@ -413,23 +417,25 @@ body {
   color: white;
   display: flex;
   justify-content: space-between;
-  padding: 16px 20px;
-  font-size: 18px;
+  padding: clamp(18px, 2.2vh, 36px) clamp(24px, 2.5vw, 45px);
+  font-size: clamp(20px, 1.8vw, 36px);
+  font-weight: bold;
 }
 
 .footer-actions {
   display: flex;
-  gap: 10px;
-  padding: 12px 20px;
+  gap: 15px;
+  padding: clamp(14px, 1.8vh, 26px) clamp(20px, 2vw, 40px);
 }
 
 .btn-secondary {
   flex: 1;
   background-color: #f1f5f9;
-  border: 1px solid var(--knc-border);
-  padding: 12px;
-  border-radius: 4px;
-  font-weight: 600;
+  border: 1.5px solid var(--knc-border);
+  padding: clamp(14px, 1.8vh, 26px);
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: clamp(15px, 1.2vw, 24px);
   cursor: pointer;
 }
 
@@ -438,9 +444,10 @@ body {
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 4px;
+  padding: clamp(14px, 1.8vh, 26px);
+  border-radius: 6px;
   font-weight: bold;
+  font-size: clamp(16px, 1.3vw, 26px);
   cursor: pointer;
 }
 
@@ -448,30 +455,30 @@ body {
 .payment-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-top: 8px;
+  gap: clamp(16px, 2vw, 36px);
+  margin-top: 10px;
 }
 
 .pay-card {
   background-color: var(--knc-gray-box);
-  border: 1px solid var(--knc-border);
-  border-radius: 8px;
-  padding: 22px 10px;
+  border: 1.5px solid var(--knc-border);
+  border-radius: 12px;
+  padding: clamp(26px, 3.5vh, 50px) 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   cursor: pointer;
   text-align: center;
 }
 
 .pay-card i {
-  font-size: 32px;
+  font-size: clamp(38px, 3.2vw, 65px);
   color: var(--text-dark);
 }
 
 .pay-card span {
-  font-size: 14px;
+  font-size: clamp(15px, 1.3vw, 26px);
   font-weight: 600;
   color: var(--text-dark);
 }
@@ -481,38 +488,38 @@ body {
   background-color: var(--knc-blue);
   color: white;
   text-align: center;
-  padding: 40px 24px;
+  padding: clamp(40px, 6vh, 90px) clamp(24px, 3vw, 60px);
 }
 
 .success-circle {
-  width: 130px;
-  height: 130px;
-  border: 3px solid white;
+  width: clamp(150px, 13vw, 250px);
+  height: clamp(150px, 13vw, 250px);
+  border: 4px solid white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 60px;
-  margin-bottom: 25px;
+  font-size: clamp(70px, 6vw, 120px);
+  margin-bottom: clamp(25px, 3.5vh, 50px);
 }
 
 .success-title {
-  font-size: 22px;
+  font-size: clamp(24px, 2.2vw, 44px);
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
 .btn-white-action {
   background-color: white;
   color: var(--knc-blue);
   border: none;
-  padding: 18px;
-  border-radius: 6px;
-  font-size: 16px;
+  padding: clamp(20px, 2.5vh, 38px);
+  border-radius: 8px;
+  font-size: clamp(18px, 1.4vw, 30px);
   font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
 }
