@@ -2,203 +2,688 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>PDV KNC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Totem de Autoatendimento | KNC Brasil</title>
+  
+  <!-- Estilos principais do PDV -->
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Fontes do Google: Inter e Montserrat para estética moderna de totem -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-  <div class="kiosk-container">
+  <!-- CONTAINER PRINCIPAL DO TOTEM (Proporção vertical 9:16 - 1080x1920) -->
+  <main class="kiosk-container" id="kiosk-app">
 
-    <!-- TELA 1: HOME -->
-    <section id="step-home" class="screen active">
-      <div class="brand-hero">
-        <h1 class="logo-text">KNC</h1>
+    <!-- ================================================================= -->
+    <!-- TELA 1: HOME / STANDBY (Com Vídeo em Looping Institucional)      -->
+    <!-- ================================================================= -->
+    <section id="step-home" class="screen active" onclick="handleHomeTap(event)">
+      
+      <!-- Container do Vídeo de Fundo em Loop -->
+      <div class="video-background-container">
+        <video 
+          id="home-video-player" 
+          class="home-video" 
+          autoplay 
+          muted 
+          loop 
+          playsinline 
+          preload="auto"
+          poster=""
+        >
+          <!-- Arquivo de vídeo local (coloque seu vídeo em assets/video-loop.mp4) -->
+          <source src="assets/video-loop.mp4" type="video/mp4">
+        </video>
+
+        <!-- Fallback visual dinâmico elegante enquanto não houver arquivo de vídeo -->
+        <div class="video-fallback-mesh">
+          <div class="glow-orb orb-1"></div>
+          <div class="glow-orb orb-2"></div>
+          <div class="glow-orb orb-3"></div>
+          <div class="video-notice-badge">
+            <i class="fa-solid fa-film"></i>
+            <span>Espaço reservado para vídeo em loop (<code>assets/video-loop.mp4</code>)</span>
+          </div>
+        </div>
+
+        <!-- Camada de overlay escurecido com gradiente KNC para legibilidade -->
+        <div class="video-overlay-gradient"></div>
       </div>
-      <div class="center-content">
-        <button class="circle-btn" onclick="goToStep('cliente')">
-          <i class="fa-solid fa-cart-shopping"></i>
+
+      <!-- Conteúdo Sobreposto da Tela Inicial -->
+      <div class="home-content-wrapper">
+        
+        <!-- Topo: Marca KNC com suporte a toque longo para Painel Admin -->
+        <header class="home-header">
+          <div class="logo-knc-badge" title="Toque longo para gerenciar produtos">
+            <h1 class="logo-knc-text">KNC</h1>
+            <span class="logo-knc-sub">BRASIL</span>
+          </div>
+          <p class="home-tagline">Soluções que conectam, resultados que transformam</p>
+        </header>
+
+        <!-- Centro: Botão Pulsante e Chamada Visual -->
+        <div class="home-center-action">
+          <div class="pulse-ring-container">
+            <div class="pulse-ring pulse-1"></div>
+            <div class="pulse-ring pulse-2"></div>
+            <button class="circle-start-btn" aria-label="Iniciar Atendimento">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
+          <h2 class="touch-callout-title">TOQUE NA TELA</h2>
+          <p class="touch-callout-subtitle">para iniciar seu autoatendimento</p>
+        </div>
+
+        <!-- Rodapé da Home: Botão de Ação Principal e Informações -->
+        <footer class="home-footer">
+          <button class="btn-start-large" onclick="goToStep('cliente')">
+            <span>Iniciar Compra</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          
+          <div class="home-footer-info">
+            <span><i class="fa-solid fa-shield-halved"></i> Autoatendimento Rápido e Seguro</span>
+            <span class="admin-hint" onclick="event.stopPropagation(); openAdminModal();">
+              <i class="fa-solid fa-gear"></i> Catálogo / Admin
+            </span>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TELA 2: IDENTIFICAÇÃO DO CLIENTE (Clube KNC / CPF com Teclado)   -->
+    <!-- ================================================================= -->
+    <section id="step-cliente" class="screen">
+      
+      <!-- Topo Padrão -->
+      <header class="top-nav">
+        <div class="nav-brand" onclick="handleBrandTap()">
+          <span class="nav-logo">KNC</span>
+          <span class="nav-logo-sub">BRASIL</span>
+        </div>
+        <button class="btn-nav-back" onclick="goToStep('home')">
+          <i class="fa-solid fa-chevron-left"></i> Voltar
         </button>
+      </header>
+
+      <div class="screen-body">
+        
+        <!-- Cabeçalho da Etapa -->
+        <div class="step-header">
+          <div class="step-icon-badge">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <h2 class="step-title">CLIENTE KNC?</h2>
+          <p class="step-subtitle">Identifique-se com o CPF para acumular benefícios e descontos exclusivos</p>
+        </div>
+
+        <!-- Opções de Escolha (Sou Cliente / Não Sou Cliente) -->
+        <div class="client-choice-grid">
+          <button type="button" class="choice-card active" id="card-sim" onclick="setCustomerType(true)">
+            <div class="choice-icon-wrap">
+              <i class="fa-solid fa-id-card"></i>
+            </div>
+            <div class="choice-text-wrap">
+              <strong>Sou Cliente KNC</strong>
+              <span>Informar meu CPF e obter vantagens</span>
+            </div>
+            <div class="choice-radio-indicator">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+          </button>
+
+          <button type="button" class="choice-card" id="card-nao" onclick="setCustomerType(false)">
+            <div class="choice-icon-wrap">
+              <i class="fa-solid fa-user-xmark"></i>
+            </div>
+            <div class="choice-text-wrap">
+              <strong>Não Sou Cliente</strong>
+              <span>Continuar compra sem identificação</span>
+            </div>
+            <div class="choice-radio-indicator">
+              <i class="fa-regular fa-circle"></i>
+            </div>
+          </button>
+        </div>
+
+        <!-- Container do CPF e Teclado Numérico Virtual (Touch Screen) -->
+        <div class="cpf-section-container" id="cpf-container">
+          
+          <!-- Campo de Visualização do CPF -->
+          <div class="cpf-input-wrapper">
+            <label for="cpf-display">Digite o seu CPF:</label>
+            <div class="cpf-display-box" id="cpf-display-box">
+              <span id="cpf-display-text" class="cpf-text-placeholder">000.000.000-00</span>
+              <button type="button" class="btn-clear-inline" onclick="clearCpfInput()" title="Limpar CPF">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </button>
+            </div>
+            <!-- Input oculto para compatibilidade com teclado físico -->
+            <input 
+              type="text" 
+              id="cpf-hidden-input" 
+              class="cpf-hidden-input" 
+              maxlength="14" 
+              inputmode="numeric" 
+              autocomplete="off"
+            >
+          </div>
+
+          <!-- Teclado Numérico Virtual Touch (Kiosk Keypad) -->
+          <div class="virtual-keypad">
+            <button type="button" class="keypad-btn" onclick="keypadPress('1')">1</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('2')">2</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('3')">3</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('4')">4</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('5')">5</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('6')">6</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('7')">7</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('8')">8</button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('9')">9</button>
+            <button type="button" class="keypad-btn keypad-action-clear" onclick="clearCpfInput()">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+            <button type="button" class="keypad-btn" onclick="keypadPress('0')">0</button>
+            <button type="button" class="keypad-btn keypad-action-backspace" onclick="keypadBackspace()">
+              <i class="fa-solid fa-delete-left"></i>
+            </button>
+          </div>
+
+        </div>
+
       </div>
-      <button class="btn-primary-large" onclick="goToStep('cliente')">
-        Clique para iniciar a sua compra
-      </button>
-      <footer class="footer-bar">
-        <span>Soluções que conectam, resultados que transformam.</span>
+
+      <!-- Rodapé com Ação de Confirmar -->
+      <footer class="screen-footer">
+        <p class="legal-notice">
+          <i class="fa-solid fa-lock"></i> Seus dados estão protegidos de acordo com a LGPD.
+        </p>
+        <button class="btn-action-primary" id="btn-confirm-cpf" onclick="confirmCpfAndProceed()">
+          <span>Continuar para Leitura</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
       </footer>
     </section>
 
-    <!-- TELA 2: CLIENTE KNC -->
-    <section id="step-cliente" class="screen">
+    <!-- ================================================================= -->
+    <!-- TELA 3: ESCANEAR PRODUTO (Código de Barras EAN & QR Code)         -->
+    <!-- ================================================================= -->
+    <section id="step-escanear" class="screen">
+      
+      <!-- Topo Padrão -->
       <header class="top-nav">
-        <h2 class="nav-logo">KNC</h2>
-        <button class="btn-voltar" onclick="goToStep('home')">Voltar</button>
-      </header>
-      <div class="screen-body">
-        <div class="header-icon-title">
-          <div class="icon-bubble"><i class="fa-solid fa-user"></i></div>
-          <h3>CLIENTE KNC?</h3>
-          <p class="subtitle">Identifique-se para benefícios exclusivos</p>
+        <div class="nav-brand" onclick="handleBrandTap()">
+          <span class="nav-logo">KNC</span>
+          <span class="nav-logo-sub">BRASIL</span>
         </div>
+        <button class="btn-nav-back" onclick="goToStep('cliente')">
+          <i class="fa-solid fa-chevron-left"></i> Voltar
+        </button>
+      </header>
+
+      <div class="screen-body screen-scanner-body">
         
-        <div class="choice-cards">
-          <div class="choice-card selected" id="card-sim" onclick="selectCpfOption(true)">
-            <i class="fa-solid fa-user-check"></i>
-            <strong>Sou cliente KNC</strong>
-            <span>Digite seu CPF para acumular benefícios e descontos</span>
+        <!-- Cabeçalho e Animação Central do Leitor -->
+        <div class="scanner-hero-area">
+          
+          <div class="scanner-badge-glow">
+            <div class="scanner-laser-line"></div>
+            <i class="fa-solid fa-barcode scanner-big-icon"></i>
+            <i class="fa-solid fa-qrcode scanner-mini-qr"></i>
           </div>
-          <div class="choice-card" id="card-nao" onclick="goToStep('escanear')">
-            <i class="fa-solid fa-user-slash"></i>
-            <strong>Não sou cliente</strong>
-            <span>Continuar compra sem identificação</span>
+
+          <h2 class="scanner-main-title">Aproxime o código<br>do produto</h2>
+          <p class="scanner-main-sub">
+            Posicione o <strong>Código de Barras (EAN)</strong> ou <strong>QR Code</strong> na mira do leitor abaixo
+          </p>
+
+          <div class="bouncing-arrow">
+            <i class="fa-solid fa-angles-down"></i>
           </div>
         </div>
 
-        <div class="input-group" id="cpf-container">
-          <label>Digite o seu CPF</label>
-          <input type="text" id="cpf-input" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
-          <button class="btn-action" onclick="goToStep('escanear')">Confirmar CPF <i class="fa-solid fa-arrow-right"></i></button>
+        <!-- Card Interativo de Teste Rápido de Produtos (Ideal para Demonstração) -->
+        <div class="quick-demo-shelf">
+          <div class="shelf-header">
+            <span><i class="fa-solid fa-wand-magic-sparkles"></i> Simulação Rápida (Clique para Bipar)</span>
+            <button type="button" class="btn-shelf-admin" onclick="openAdminModal()">Gerenciar Produtos</button>
+          </div>
+          <div class="shelf-items-scroll" id="shelf-demo-products">
+            <!-- Itens carregados dinamicamente via JS do LocalStorage -->
+          </div>
         </div>
+
+        <!-- Área Inferior: Mira do Leitor Físico -->
+        <div class="scanner-kiosk-dock">
+          <div class="dock-target-frame">
+            <div class="dock-laser-beam"></div>
+            <div class="dock-icon-wrap">
+              <i class="fa-solid fa-barcode"></i>
+            </div>
+            <span class="dock-label">ÁREA DO LEITOR ÓPTICO</span>
+            <span class="dock-sublabel">Leitura instantânea USB / Laser</span>
+          </div>
+        </div>
+
       </div>
-      <footer class="legal-text">Seus dados estão seguros conosco.</footer>
+
+      <!-- Rodapé: Ver Carrinho Atual caso já tenha itens -->
+      <footer class="screen-footer horizontal-flex" id="scanner-footer-bar" style="display: none;">
+        <div class="scanner-cart-preview">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="scanner-cart-items-count">0 itens no carrinho</span>
+        </div>
+        <button class="btn-action-primary auto-width" onclick="goToStep('carrinho')">
+          <span>Ver Carrinho</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </footer>
     </section>
 
-<!-- TELA 3: ESCANEAR -->
-<section id="step-escanear" class="screen">
-  <header class="top-nav">
-    <h2 class="nav-logo">KNC</h2>
-    <button class="btn-voltar" onclick="goToStep('cliente')">&lt; Voltar</button>
-  </header>
-  
-  <div class="screen-body center-flex no-padding-bottom">
-    <div class="scanner-circle">
-      <i class="fa-solid fa-barcode"></i>
-    </div>
-    
-    <h3 class="scan-title">Faça a leitura do código<br>do produto</h3>
-    <p class="subtitle scan-sub">Aproxime o código de barras<br>abaixo</p>
-    
-    <i class="fa-solid fa-chevron-down arrow-indicator"></i>
-  </div>
-
-  <div class="scanner-bottom-area">
-    <div class="scanner-outer-box">
-      <div class="scanner-inner-box">
-        <div class="scanner-icon-target">
-          <i class="fa-solid fa-barcode"></i>
+    <!-- ================================================================= -->
+    <!-- TELA 4: CARRINHO DE COMPRAS (Revisão, Quantidades e Totais)       -->
+    <!-- ================================================================= -->
+    <section id="step-carrinho" class="screen">
+      
+      <!-- Topo Padrão -->
+      <header class="top-nav">
+        <div class="nav-brand" onclick="handleBrandTap()">
+          <span class="nav-logo">KNC</span>
+          <span class="nav-logo-sub">BRASIL</span>
         </div>
-        <span class="scanner-instruction">Posicione o código<br>de barras no leitor</span>
+        <button class="btn-nav-add-more" onclick="goToStep('escanear')">
+          <i class="fa-solid fa-plus"></i> Adicionar Mais Produtos
+        </button>
+      </header>
+
+      <div class="screen-body screen-cart-body">
+        
+        <!-- Título da Tela -->
+        <div class="cart-header-row">
+          <div class="cart-title-wrap">
+            <div class="step-icon-badge small">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div>
+              <h2 class="cart-title">Sua Compra</h2>
+              <p class="cart-subtitle" id="cart-item-count-label">0 itens adicionados</p>
+            </div>
+          </div>
+          
+          <button class="btn-clear-cart" onclick="promptClearCart()" title="Esvaziar Carrinho">
+            <i class="fa-solid fa-trash-can"></i> Limpar
+          </button>
+        </div>
+
+        <!-- Lista de Produtos no Carrinho -->
+        <div class="cart-items-scroll-area">
+          <table class="cart-table" id="cart-table">
+            <thead>
+              <tr>
+                <th class="th-product">Produto / Descrição</th>
+                <th class="th-qty">Qtd</th>
+                <th class="th-unit">Unitário</th>
+                <th class="th-total">Total</th>
+                <th class="th-action"></th>
+              </tr>
+            </thead>
+            <tbody id="cart-items-tbody">
+              <!-- Renderizado dinamicamente via JS -->
+            </tbody>
+          </table>
+
+          <!-- Estado Vazio -->
+          <div class="cart-empty-state" id="cart-empty-state" style="display: none;">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <h3>Seu carrinho está vazio</h3>
+            <p>Aproxime um produto do leitor para começar</p>
+            <button class="btn-action-primary" onclick="goToStep('escanear')">
+              <i class="fa-solid fa-barcode"></i> Escanear Produtos
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Rodapé com Totalizador e Finalização -->
+      <footer class="cart-checkout-footer">
+        
+        <!-- Faixa de Resumo do Cliente e Total -->
+        <div class="cart-summary-panel">
+          <div class="customer-info-tag" id="cart-customer-badge">
+            <i class="fa-solid fa-user-tag"></i>
+            <span id="cart-customer-text">Cliente Não Identificado</span>
+          </div>
+          
+          <div class="total-display-group">
+            <span class="total-label">Total a Pagar</span>
+            <strong class="total-amount" id="cart-total-value">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <!-- Botões de Ação Inferiores -->
+        <div class="cart-actions-row">
+          <button class="btn-secondary-large" onclick="goToStep('escanear')">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Continuar Comprando</span>
+          </button>
+          
+          <button class="btn-action-large" id="btn-finish-order" onclick="goToStep('checkout')">
+            <span>Pagar Agora</span>
+            <i class="fa-solid fa-credit-card"></i>
+          </button>
+        </div>
+
+      </footer>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TELA 5: FORMAS DE PAGAMENTO                                       -->
+    <!-- ================================================================= -->
+    <section id="step-checkout" class="screen">
+      
+      <!-- Topo Padrão -->
+      <header class="top-nav">
+        <div class="nav-brand" onclick="handleBrandTap()">
+          <span class="nav-logo">KNC</span>
+          <span class="nav-logo-sub">BRASIL</span>
+        </div>
+        <button class="btn-nav-back" onclick="goToStep('carrinho')">
+          <i class="fa-solid fa-chevron-left"></i> Voltar ao Carrinho
+        </button>
+      </header>
+
+      <div class="screen-body">
+        
+        <!-- Cabeçalho da Etapa -->
+        <div class="step-header">
+          <div class="step-icon-badge">
+            <i class="fa-regular fa-credit-card"></i>
+          </div>
+          <h2 class="step-title">Forma de Pagamento</h2>
+          <p class="step-subtitle">Selecione como deseja realizar o pagamento do seu pedido</p>
+        </div>
+
+        <!-- Grade com Formas de Pagamento -->
+        <div class="payment-methods-grid">
+          
+          <!-- Débito -->
+          <button type="button" class="payment-card" onclick="selectPaymentMethod('Cartão de Débito', 'fa-solid fa-credit-card')">
+            <div class="payment-icon-bubble">
+              <i class="fa-solid fa-credit-card"></i>
+            </div>
+            <strong class="payment-title">Cartão de Débito</strong>
+            <span class="payment-desc">Aproximação ou Inserção</span>
+            <div class="payment-chip-badge">
+              <i class="fa-solid fa-wifi"></i> Contactless
+            </div>
+          </button>
+
+          <!-- Crédito -->
+          <button type="button" class="payment-card" onclick="selectPaymentMethod('Cartão de Crédito', 'fa-regular fa-credit-card')">
+            <div class="payment-icon-bubble">
+              <i class="fa-regular fa-credit-card"></i>
+            </div>
+            <strong class="payment-title">Cartão de Crédito</strong>
+            <span class="payment-desc">À vista ou Parcelado</span>
+            <div class="payment-chip-badge">
+              <i class="fa-solid fa-wifi"></i> Contactless
+            </div>
+          </button>
+
+          <!-- PIX -->
+          <button type="button" class="payment-card featured-pix" onclick="selectPaymentMethod('PIX', 'fa-brands fa-pix')">
+            <div class="payment-icon-bubble pix-bubble">
+              <i class="fa-brands fa-pix"></i>
+            </div>
+            <strong class="payment-title">PIX Instantâneo</strong>
+            <span class="payment-desc">Pague pelo QR Code no celular</span>
+            <div class="payment-chip-badge pix-badge">
+              <i class="fa-solid fa-bolt"></i> Aprovação Imediata
+            </div>
+          </button>
+
+          <!-- Vale Refeição / Alimentação -->
+          <button type="button" class="payment-card" onclick="selectPaymentMethod('Vale Alimentação / Refeição', 'fa-solid fa-utensils')">
+            <div class="payment-icon-bubble">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <strong class="payment-title">Alimentação / Refeição</strong>
+            <span class="payment-desc">Alelo, Sodexo, VR, Ticket</span>
+            <div class="payment-chip-badge">
+              <i class="fa-solid fa-circle-check"></i> Vales Aceitos
+            </div>
+          </button>
+
+          <!-- Dinheiro / Balcão -->
+          <button type="button" class="payment-card full-span" onclick="selectPaymentMethod('Dinheiro no Caixa', 'fa-solid fa-money-bill-wave')">
+            <div class="payment-icon-bubble">
+              <i class="fa-solid fa-money-bill-wave"></i>
+            </div>
+            <div class="payment-text-inline">
+              <strong class="payment-title">Pagar no Caixa / Dinheiro</strong>
+              <span class="payment-desc">Retire a comanda e pague com atendente</span>
+            </div>
+            <i class="fa-solid fa-chevron-right arrow-right-icon"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Rodapé com Total a Pagar -->
+      <footer class="screen-footer payment-footer">
+        <div class="checkout-total-bar">
+          <span class="label">Valor Total do Pedido:</span>
+          <strong class="value" id="checkout-total-value">R$ 0,00</strong>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TELA 6: CONFIRMAÇÃO E SUCESSO                                    -->
+    <!-- ================================================================= -->
+    <section id="step-confirmacao" class="screen screen-success-theme">
+      
+      <!-- Topo Brand KNC -->
+      <div class="success-top-brand">
+        <h2 class="success-brand-title">KNC</h2>
+        <span class="success-brand-sub">BRASIL</span>
+      </div>
+
+      <!-- Conteúdo Central da Confirmação -->
+      <div class="success-center-content">
+        
+        <!-- Círculo de Sucesso Animado -->
+        <div class="success-animated-circle">
+          <i class="fa-solid fa-check"></i>
+        </div>
+
+        <h2 class="success-headline">Compra Realizada<br>com Sucesso!</h2>
+        <p class="success-submessage">
+          Seu pagamento foi confirmado com êxito.<br>
+          Retire o seu comprovante impresso abaixo.
+        </p>
+
+        <!-- Card de Resumo do Pedido -->
+        <div class="receipt-summary-card">
+          <div class="receipt-header">
+            <span><i class="fa-solid fa-receipt"></i> Comprovante do Pedido</span>
+            <span id="receipt-order-id">#KNC-84920</span>
+          </div>
+          <div class="receipt-body">
+            <div class="receipt-row">
+              <span>Método:</span>
+              <strong id="receipt-payment-method">Cartão de Crédito</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Total Pago:</span>
+              <strong class="price-highlight" id="receipt-total-value">R$ 0,00</strong>
+            </div>
+            <div class="receipt-row" id="receipt-customer-row">
+              <span>Cliente:</span>
+              <span id="receipt-customer-cpf">Não Identificado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Temporizador de Auto-Retorno -->
+        <div class="auto-return-countdown">
+          <span>Esta tela fechará automaticamente em <strong id="countdown-timer">10</strong>s</span>
+        </div>
+
+      </div>
+
+      <!-- Botão para Iniciar Nova Compra Imediatamente -->
+      <footer class="success-footer">
+        <button class="btn-success-action" onclick="resetAllPurchase()">
+          <i class="fa-solid fa-cart-plus"></i>
+          <span>Iniciar Nova Compra</span>
+        </button>
+      </footer>
+    </section>
+
+  </main>
+
+
+  <!-- ================================================================= -->
+  <!-- MODAL: SIMULADOR DE PROCESSAMENTO DE PAGAMENTO (PIX / TEF)         -->
+  <!-- ================================================================= -->
+  <div class="modal-backdrop" id="modal-payment-process">
+    <div class="modal-card modal-payment-card">
+      <div class="modal-header">
+        <h3 id="modal-payment-title"><i class="fa-solid fa-spinner fa-spin"></i> Processando Pagamento</h3>
+        <button class="modal-close-btn" onclick="closePaymentModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-payment-body">
+        <!-- Preenchido dinamicamente com animação de cartão ou QR Code Pix -->
       </div>
     </div>
   </div>
-</section>
 
-    <!-- TELA 4: CARRINHO -->
-    <section id="step-carrinho" class="screen">
-      <header class="top-nav">
-        <h2 class="nav-logo">KNC</h2>
-        <button class="btn-voltar" onclick="goToStep('escanear')">+ Adicionar Mais</button>
-      </header>
-      <div class="screen-body">
-        <div class="header-icon-title horizontal">
-          <div class="icon-bubble small"><i class="fa-solid fa-cart-shopping"></i></div>
-          <h3>Sua compra</h3>
+
+  <!-- ================================================================= -->
+  <!-- MODAL: GESTÃO DO CATÁLOGO DE PRODUTOS (LocalStorage / Admin)      -->
+  <!-- ================================================================= -->
+  <div class="modal-backdrop" id="modal-admin-catalog">
+    <div class="modal-card modal-admin-card">
+      
+      <div class="modal-header">
+        <div>
+          <h3><i class="fa-solid fa-boxes-stacked"></i> Gerenciamento de Produtos (LocalStorage)</h3>
+          <p class="modal-sub">Cadastre, edite e teste a bipagem de produtos no totem</p>
         </div>
+        <button class="modal-close-btn" onclick="closeAdminModal()">&times;</button>
+      </div>
 
-        <div class="table-wrapper">
-          <table class="cart-table">
+      <div class="modal-body modal-admin-body">
+        
+        <!-- Formulário de Cadastro / Edição Rápida -->
+        <form id="form-product" class="admin-product-form" onsubmit="handleProductFormSubmit(event)">
+          <input type="hidden" id="prod-form-id">
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="prod-name">Nome do Produto *</label>
+              <input type="text" id="prod-name" placeholder="Ex: Refrigerante Lata 350ml" required>
+            </div>
+
+            <div class="form-group">
+              <label for="prod-price">Preço (R$) *</label>
+              <input type="number" step="0.01" min="0.01" id="prod-price" placeholder="Ex: 8.50" required>
+            </div>
+
+            <div class="form-group">
+              <label for="prod-ean">Código de Barras (EAN-13) *</label>
+              <div class="input-with-action">
+                <input type="text" id="prod-ean" placeholder="Ex: 7894900011517" required>
+                <button type="button" class="btn-gen-code" onclick="generateRandomEan()" title="Gerar EAN Aleatório">
+                  <i class="fa-solid fa-dice"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prod-qrcode">Código QR (QRCode) *</label>
+              <div class="input-with-action">
+                <input type="text" id="prod-qrcode" placeholder="Ex: KNC-PROD-001" required>
+                <button type="button" class="btn-gen-code" onclick="generateRandomQrCode()" title="Gerar QRCode Aleatório">
+                  <i class="fa-solid fa-qrcode"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="prod-desc">Descrição Detalhada</label>
+              <input type="text" id="prod-desc" placeholder="Ex: Bebida gaseificada sabor cola sem açúcar">
+            </div>
+
+            <div class="form-group">
+              <label for="prod-category">Categoria</label>
+              <select id="prod-category">
+                <option value="Bebidas">Bebidas</option>
+                <option value="Snacks">Snacks / Doces</option>
+                <option value="Alimentos">Alimentos</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="prod-image">URL da Imagem / Ícone</label>
+              <input type="text" id="prod-image" placeholder="assets/produto.png ou URL">
+            </div>
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="btn-save-product">
+              <i class="fa-solid fa-floppy-disk"></i> Salvar Produto
+            </button>
+            <button type="button" class="btn-cancel-edit" id="btn-cancel-edit" onclick="resetProductForm()" style="display: none;">
+              Cancelar Edição
+            </button>
+          </div>
+        </form>
+
+        <!-- Tabela de Produtos Cadastrados -->
+        <div class="admin-table-wrapper">
+          <div class="admin-table-header">
+            <h4>Catálogo Atual (<span id="admin-product-count">0</span> produtos cadastrados)</h4>
+            <button type="button" class="btn-reset-default" onclick="confirmResetDefaultCatalog()">
+              <i class="fa-solid fa-rotate-left"></i> Restaurar Padrão de Fábrica
+            </button>
+          </div>
+
+          <table class="admin-products-table">
             <thead>
               <tr>
                 <th>Produto</th>
-                <th>Qtde</th>
-                <th>Valor Unit</th>
-                <th>Total</th>
+                <th>EAN (Barras)</th>
+                <th>QR Code</th>
+                <th>Preço</th>
+                <th>Ações / Testar Bip</th>
               </tr>
             </thead>
-            <tbody id="cart-items">
+            <tbody id="admin-products-tbody">
               <!-- Renderizado via JS -->
             </tbody>
           </table>
         </div>
+
       </div>
-
-      <div class="checkout-footer">
-        <div class="total-row">
-          <span>Total da compra</span>
-          <strong id="cart-total-value">R$ 0,00</strong>
-        </div>
-        <div class="footer-actions">
-          <button class="btn-secondary" onclick="goToStep('escanear')">Voltar</button>
-          <button class="btn-action-large" onclick="goToStep('checkout')">Finalizar Pedido <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- TELA 5: FORMAS DE PAGAMENTO -->
-    <section id="step-checkout" class="screen">
-      <header class="top-nav">
-        <h2 class="nav-logo">KNC</h2>
-        <button class="btn-voltar" onclick="goToStep('carrinho')">Voltar</button>
-      </header>
-      <div class="screen-body">
-        <div class="header-icon-title horizontal">
-          <div class="icon-bubble small"><i class="fa-regular fa-credit-card"></i></div>
-          <h3>Formas de pagamento</h3>
-        </div>
-
-        <div class="payment-grid">
-          <div class="pay-card" onclick="finishPayment('Cartão de Débito')">
-            <i class="fa-solid fa-credit-card"></i>
-            <span>Cartão de Débito</span>
-          </div>
-          <div class="pay-card" onclick="finishPayment('Cartão de Crédito')">
-            <i class="fa-regular fa-credit-card"></i>
-            <span>Cartão de Crédito</span>
-          </div>
-          <div class="pay-card" onclick="finishPayment('PIX')">
-            <i class="fa-brands fa-pix"></i>
-            <span>Pix</span>
-          </div>
-          <div class="pay-card" onclick="finishPayment('Dinheiro')">
-            <i class="fa-solid fa-money-bill-wave"></i>
-            <span>Dinheiro</span>
-          </div>
-          <div class="pay-card" onclick="finishPayment('Vale Refeição')">
-            <i class="fa-solid fa-gift"></i>
-            <span>Alimentação</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="checkout-footer">
-        <div class="total-row">
-          <span>Total a pagar</span>
-          <strong id="checkout-total-value">R$ 0,00</strong>
-        </div>
-        <div class="footer-actions">
-          <button class="btn-secondary" onclick="goToStep('carrinho')">Voltar</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- TELA 6: CONFIRMAÇÃO -->
-    <section id="step-confirmacao" class="screen dark-theme">
-      <h2 class="nav-logo large">KNC</h2>
-      <div class="center-content">
-        <div class="success-circle">
-          <i class="fa-solid fa-check"></i>
-        </div>
-        <h3 class="success-title">Sua compra foi realizada com sucesso!</h3>
-        <p class="subtitle white">Obrigado pela sua compra!<br>Volte Sempre.</p>
-      </div>
-      <button class="btn-white-action" onclick="resetAll()">
-        <i class="fa-solid fa-cart-shopping"></i> Iniciar nova compra
-      </button>
-    </section>
-
+    </div>
   </div>
 
+  <!-- Script Principal com Lógica do Totem e LocalStorage -->
   <script src="script.js"></script>
 </body>
 </html>
