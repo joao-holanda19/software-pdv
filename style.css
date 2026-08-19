@@ -204,12 +204,12 @@
 #screen-cliente .screen-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start; /* Alinha o fluxo para o topo */
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 25px 40px 30px 40px; /* Leve aumento na margem inferior para dar respiro */
-  gap: 15px;
+  padding: 25px 40px 20px 40px;
+  gap: 12px;
 }
 
 /* 1. CABEÇALHO HORIZONTAL NO TOPO */
@@ -226,21 +226,21 @@
 }
 
 .header-icon-title.horizontal .icon-bubble {
-  width: 95px;
-  height: 95px;
-  min-width: 95px;
+  width: 90px;
+  height: 90px;
+  min-width: 90px;
   background-color: var(--knc-blue);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 46px;
+  font-size: 44px;
   margin-bottom: 0;
 }
 
 .header-icon-title.horizontal h2 {
-  font-size: 42px;
+  font-size: 40px;
   font-weight: 800;
   color: var(--text-dark);
   letter-spacing: 1px;
@@ -252,55 +252,56 @@
   background-color: var(--knc-blue);
   color: white;
   display: inline-block;
-  padding: 7px 16px;
-  font-size: 17px;
+  padding: 6px 16px;
+  font-size: 16px;
   font-weight: 600;
   border-radius: 4px;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
-/* 2. CARDS CENTRAIS (Levemente reduzidos em altura) */
+/* 2. CARDS CENTRAIS (Compactos para puxar o restante para cima) */
 .choice-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  gap: 20px;
   width: 100%;
   max-width: 900px;
-  flex: 1;              /* Ajuste sutil de proporção vertical */
-  min-height: 270px;    /* Altura mínima ajustada */
-  max-height: 380px;    /* Teto reduzido para não empurrar o CPF */
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .choice-card {
   border: 1.5px solid var(--knc-border);
   background-color: #ffffff;
-  padding: 24px 20px;   /* Padding interno mais enxuto */
+  padding: 20px 18px;
   border-radius: 14px;
   text-align: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 10px;
+  min-height: 200px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .choice-card i {
-  font-size: 62px;      /* Leve redução no ícone */
+  font-size: 54px;
   color: #1e88e5;
 }
 
 .choice-card strong {
-  font-size: 24px;
+  font-size: 22px;
   color: var(--text-dark);
   font-weight: 700;
 }
 
 .choice-card span {
-  font-size: 17px;
+  font-size: 16px;
   color: #475569;
-  line-height: 1.4;
-  max-width: 300px;
+  line-height: 1.35;
+  max-width: 290px;
 }
 
 .choice-card.selected {
@@ -309,7 +310,7 @@
   box-shadow: 0 8px 24px rgba(0, 54, 90, 0.1);
 }
 
-/* 3. BLOCO DO CPF (Subido sutilmente com paddings equilibrados) */
+/* 3. BLOCO DO CPF (Subido e com gap controlado) */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -319,25 +320,25 @@
   border: 1.5px solid var(--knc-border);
   border-radius: 12px;
   background-color: #ffffff;
-  padding: 20px 22px;   /* Leve redução de altura interna */
-  gap: 14px;
+  padding: 18px 22px;
+  gap: 12px;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .input-group label {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
   color: var(--knc-blue);
   text-align: left;
 }
 
 .input-group input {
-  padding: 18px 22px;
+  padding: 16px 20px;
   border: 1.5px solid var(--knc-border);
   background-color: #f8fafc;
   border-radius: 8px;
-  font-size: 24px;
+  font-size: 22px;
   color: #334155;
   outline: none;
   width: 100%;
@@ -347,9 +348,9 @@
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  padding: 19px;
+  padding: 18px;
   border-radius: 8px;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   width: 100%;
@@ -358,13 +359,14 @@
   align-items: center;
 }
 
-/* 4. TEXTO DE SEGURANÇA NO RODAPÉ */
+/* 4. TEXTO DE SEGURANÇA (Elevado junto com o CPF) */
 .legal-text {
   text-align: center;
   font-size: 16px;
   color: var(--knc-blue);
   font-weight: 500;
-  padding-bottom: 5px;
+  margin-top: 4px;
+  margin-bottom: 35px; /* Cria folga generosa em relação ao fim da tela */
   flex-shrink: 0;
 }
   
