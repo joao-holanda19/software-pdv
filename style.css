@@ -206,81 +206,126 @@ body {
 }
 
 /* CLIENTE KNC */
-.choice-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(16px, 2vw, 36px);
-  margin-bottom: clamp(25px, 3.5vh, 50px);
+/* CLIENTE KNC - DISTRIBUIÇÃO E ALTURA */
+.screen-cliente-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 1;
+  padding: clamp(20px, 3vh, 50px) clamp(24px, 4vw, 80px);
+  width: 100%;
 }
 
-.choice-card {
+.screen-cliente-body .header-icon-title {
+  margin-bottom: 0;
+}
+
+.screen-cliente-body .choice-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2.5vw, 40px);
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 0;
+}
+
+.screen-cliente-body .choice-card {
   border: 2px solid var(--knc-border);
-  padding: clamp(24px, 3vh, 45px) clamp(16px, 1.5vw, 30px);
-  border-radius: 12px;
+  padding: clamp(24px, 3.5vh, 50px) clamp(16px, 2vw, 30px);
+  border-radius: 14px;
   text-align: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
 }
 
-.choice-card i {
-  font-size: clamp(38px, 3vw, 65px);
+.screen-cliente-body .choice-card i {
+  font-size: clamp(40px, 3.5vw, 70px);
   color: var(--knc-blue);
 }
 
-.choice-card.selected {
+.screen-cliente-body .choice-card.selected {
   border-color: var(--knc-blue);
   background-color: #f0f6fa;
+  box-shadow: 0 4px 15px rgba(0, 54, 90, 0.08);
 }
 
-.choice-card strong {
-  font-size: clamp(16px, 1.4vw, 28px);
+.screen-cliente-body .choice-card strong {
+  font-size: clamp(16px, 1.4vw, 26px);
   color: var(--text-dark);
 }
 
-.choice-card span {
+.screen-cliente-body .choice-card span {
   font-size: clamp(13px, 1.1vw, 20px);
   color: var(--text-muted);
+  line-height: 1.3;
 }
 
-.input-group {
+.screen-cliente-body .input-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
+  max-width: 900px;
 }
 
-.input-group label {
-  font-size: clamp(14px, 1.1vw, 22px);
+.screen-cliente-body .input-group label {
+  font-size: clamp(15px, 1.2vw, 22px);
   color: var(--text-muted);
+  font-weight: 500;
 }
 
-.input-group input {
-  padding: clamp(16px, 1.8vh, 28px);
+.screen-cliente-body .input-group input {
+  padding: clamp(16px, 1.8vh, 26px);
   border: 2px solid var(--knc-border);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: clamp(18px, 1.4vw, 28px);
   outline: none;
+  background-color: #f8fafc;
 }
 
-.btn-action {
+.screen-cliente-body .btn-action {
   background-color: var(--knc-blue);
   color: white;
   border: none;
-  padding: clamp(16px, 2vh, 30px);
-  border-radius: 8px;
+  padding: clamp(16px, 2vh, 28px);
+  border-radius: 10px;
   font-weight: bold;
   font-size: clamp(16px, 1.3vw, 26px);
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 8px;
 }
 
-.legal-text {
+.screen-cliente-body .legal-text {
   text-align: center;
-  font-size: clamp(13px, 1vw, 20px);
+  font-size: clamp(13px, 1vw, 18px);
   color: var(--text-muted);
-  padding: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* NOVO RODAPÉ AZUL COM LOGO */
+.footer-branded {
+  background-color: var(--knc-blue);
+  color: white;
+  padding: clamp(20px, 2.5vh, 45px) clamp(24px, 3vw, 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.footer-logo {
+  font-size: clamp(28px, 2.5vw, 48px);
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #ffffff;
 }
 
 /* ESCANEAR */
