@@ -477,73 +477,88 @@
   }
   
   /* CHECKOUT / PAGAMENTOS */
-  .payment-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
-  
-  .pay-card {
-    background-color: var(--knc-gray-box);
-    border: 1px solid var(--knc-border);
-    border-radius: 8px;
-    padding: 24px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    text-align: center;
-  }
-  
-  .pay-card i {
-    font-size: 34px;
-    color: var(--text-dark);
-  }
-  
-  .pay-card span {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-dark);
-  }
-  
-  /* TELA SUCESSO */
-  .screen.dark-theme {
-    background-color: var(--knc-blue);
-    color: white;
-    text-align: center;
-    padding: 40px 24px;
-  }
-  
-  .success-circle {
-    width: 130px;
-    height: 130px;
-    border: 3px solid white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    margin-bottom: 25px;
-  }
-  
-  .success-title {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-  
-  .btn-white-action {
-    background-color: white;
-    color: var(--knc-blue);
-    border: none;
-    padding: 18px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
+ /* Envolve o conteúdo de pagamento num container largo e centralizado */
+.screen-body:has(.payment-grid),
+#screen-pagamento .screen-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+  max-width: 850px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.pay-card {
+  background-color: var(--knc-gray-box);
+  border: 2px solid var(--knc-border);
+  border-radius: 14px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  min-height: 180px;
+}
+
+.pay-card:active,
+.pay-card:hover {
+  border-color: var(--knc-blue);
+  background-color: #f0f6fa;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 54, 90, 0.12);
+}
+
+.pay-card i {
+  font-size: 58px;
+  color: var(--knc-blue);
+}
+
+.pay-card span {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
+}
+
+/* Informações de apoio e cancelamento */
+.payment-info {
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin-top: 15px;
+  line-height: 1.5;
+}
+
+.btn-cancel-pay {
+  background-color: #f1f5f9;
+  border: 2px solid var(--knc-border);
+  color: var(--text-dark);
+  padding: 18px 32px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 25px;
+  width: 100%;
+  max-width: 850px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cancel-pay:hover {
+  background-color: #e2e8f0;
+}
