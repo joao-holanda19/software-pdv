@@ -204,43 +204,43 @@
 #screen-cliente .screen-body {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Alinha o fluxo para o topo */
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 25px 40px 20px 40px;
-  gap: 12px;
+  padding: 25px 40px 40px 40px; /* Folga inferior para proteger o rodapé */
+  gap: 18px;
 }
 
-/* 1. CABEÇALHO HORIZONTAL NO TOPO */
+/* 1. CABEÇALHO NO TOPO */
 .header-icon-title.horizontal {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 20px;
   width: 100%;
-  max-width: 900px;
-  margin: 5px 0;
+  max-width: 850px;
+  margin: 5px 0 10px 0;
   text-align: left;
   flex-shrink: 0;
 }
 
 .header-icon-title.horizontal .icon-bubble {
-  width: 90px;
-  height: 90px;
-  min-width: 90px;
+  width: 88px;
+  height: 88px;
+  min-width: 88px;
   background-color: var(--knc-blue);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 44px;
+  font-size: 42px;
   margin-bottom: 0;
 }
 
 .header-icon-title.horizontal h2 {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: 800;
   color: var(--text-dark);
   letter-spacing: 1px;
@@ -252,29 +252,29 @@
   background-color: var(--knc-blue);
   color: white;
   display: inline-block;
-  padding: 6px 16px;
+  padding: 6px 14px;
   font-size: 16px;
   font-weight: 600;
   border-radius: 4px;
   margin-top: 6px;
 }
 
-/* 2. CARDS CENTRAIS (Compactos para puxar o restante para cima) */
+/* 2. CARDS DE ESCOLHA (Centralizados e Levemente Reduzidos) */
 .choice-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   width: 100%;
-  max-width: 900px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  max-width: 850px;
+  margin: 0 auto;
+  flex-shrink: 0;
 }
 
 .choice-card {
   border: 1.5px solid var(--knc-border);
   background-color: #ffffff;
-  padding: 20px 18px;
-  border-radius: 14px;
+  padding: 22px 18px;
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
   display: flex;
@@ -282,48 +282,48 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 200px;
+  min-height: 190px; /* Altura controlada para não empurrar a tela */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .choice-card i {
-  font-size: 54px;
+  font-size: 52px;
   color: #1e88e5;
 }
 
 .choice-card strong {
-  font-size: 22px;
+  font-size: 21px;
   color: var(--text-dark);
   font-weight: 700;
 }
 
 .choice-card span {
-  font-size: 16px;
+  font-size: 15px;
   color: #475569;
   line-height: 1.35;
-  max-width: 290px;
+  max-width: 270px;
 }
 
 .choice-card.selected {
   border-color: var(--knc-blue);
   background-color: #f0f6fa;
-  box-shadow: 0 8px 24px rgba(0, 54, 90, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 54, 90, 0.1);
 }
 
-/* 3. BLOCO DO CPF (Subido e com gap controlado) */
+/* 3. BLOCO DO CPF (Elevado) */
 .input-group {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
-  max-width: 900px;
+  max-width: 850px;
   border: 1.5px solid var(--knc-border);
   border-radius: 12px;
   background-color: #ffffff;
-  padding: 18px 22px;
+  padding: 20px 22px;
   gap: 12px;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  margin-top: 4px;
 }
 
 .input-group label {
@@ -359,14 +359,14 @@
   align-items: center;
 }
 
-/* 4. TEXTO DE SEGURANÇA (Elevado junto com o CPF) */
+/* 4. FRASE DE SEGURANÇA (Elevada junto ao CPF) */
 .legal-text {
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--knc-blue);
   font-weight: 500;
-  margin-top: 4px;
-  margin-bottom: 35px; /* Cria folga generosa em relação ao fim da tela */
+  margin-top: 0;
+  margin-bottom: 25px; /* Garante que o texto fique longe do limite inferior */
   flex-shrink: 0;
 }
   
